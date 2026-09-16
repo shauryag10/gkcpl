@@ -29,6 +29,39 @@ either way. Suggested spec for the video:
 - Footage of circles being cut, coils being slit, or brushed sheet
   under moving light works best; the overlay darkens the left half
 
+### One-command preparation
+
+Download a clip, then run:
+
+```
+scripts/prepare-hero-video.sh ~/Downloads/clip.mp4 [start_seconds] [duration_seconds]
+```
+
+The script (needs ffmpeg) trims the clip, centre-crops it to 1920 × 1080,
+strips the audio, fades the loop point and writes `hero.mp4`, `hero.webm`
+and a poster frame into `assets/`. Nothing in the HTML needs changing.
+
+### Candidate clips
+
+All of these are on Pexels, whose licence allows free commercial use
+without attribution. Preview each and pick the one that suits;
+"Device in Steel Production" is the closest match by description.
+
+- Device in Steel Production: https://www.pexels.com/video/device-in-steel-production-7622785/
+- Industrial Machinery at Work in a Factory: https://www.pexels.com/video/industrial-machinery-at-work-in-a-factory-30183217/
+- Wide View of Modern Factory Production Line: https://www.pexels.com/video/wide-view-of-modern-factory-production-line-30715848/
+- Browse more: https://www.pexels.com/search/videos/stainless%20steel/ and https://www.pexels.com/search/videos/steel%20industry/
+
+## Previewing locally
+
+Any static server works. From the repository root:
+
+```
+python3 -m http.server 8000
+```
+
+then open http://localhost:8000. Or, with Node installed, `npx serve .`.
+
 ## Photographs
 
 Every visual slot has a procedural stainless-steel illustration behind
