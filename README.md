@@ -52,6 +52,13 @@ without attribution. Preview each and pick the one that suits;
 - Wide View of Modern Factory Production Line: https://www.pexels.com/video/wide-view-of-modern-factory-production-line-30715848/
 - Browse more: https://www.pexels.com/search/videos/stainless%20steel/ and https://www.pexels.com/search/videos/steel%20industry/
 
+## Hosting
+
+Pushing to the site branch runs the GitHub Pages workflow, which serves the
+folder at `https://shauryag10.github.io/gkcpl/`. If the first run reports
+that Pages is not enabled, open the repository's Settings, choose Pages,
+set Source to "GitHub Actions", and re-run the workflow.
+
 ## Previewing locally
 
 Any static server works. From the repository root:
