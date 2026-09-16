@@ -25,6 +25,14 @@ command -v ffmpeg >/dev/null || { echo "ffmpeg is not installed." >&2; exit 1; }
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p "$ROOT/assets/video" "$ROOT/assets/img"
 
+# Never ask for more than the clip holds, or the fade-out would be lost.
+SRC_LEN="$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$SRC")"
+AVAILABLE="$(awk "BEGIN{print $SRC_LEN - $START}")"
+if awk "BEGIN{exit !($DURATION > $AVAILABLE)}"; then
+  DURATION="$(awk "BEGIN{printf \"%.2f\", $AVAILABLE}")"
+  echo "Clip is ${SRC_LEN}s long; using ${DURATION}s from ${START}s."
+fi
+
 # Scale to cover 1920x1080, centre-crop, drop audio, fade the loop point.
 FILTER="scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,fps=25,\
 fade=t=in:st=0:d=0.6,fade=t=out:st=$(awk "BEGIN{print $DURATION-0.6}"):d=0.6"

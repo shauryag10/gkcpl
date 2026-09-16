@@ -49,16 +49,3 @@ jobs:
       - name: Encode hero video
         run: scripts/prepare-hero-video.sh /tmp/clip/source.mp4 "${{ inputs.start }}" "${{ inputs.duration }}"
 
-      - name: Render contact sheet for review
-        run: |
-          ffmpeg -y -loglevel error -i /tmp/clip/source.mp4 \
-            -vf "fps=1/2,scale=480:-1,tile=4x4" -frames:v 1 -q:v 4 assets/img/hero-contact-sheet.jpg
-          ls -lh assets/img/hero-contact-sheet.jpg
-
-      - name: Commit and push
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/video/hero.mp4 assets/video/hero.webm assets/img/hero-poster.jpg assets/img/hero-contact-sheet.jpg
-          git commit -m "Add hero background video from Pexels clip ${{ inputs.pexels_id }} [skip ci]"
-          git push
